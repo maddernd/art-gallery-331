@@ -1,0 +1,2 @@
+class AboriginalSymbolsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class AboriginalSymbol < ApplicationRecord
+end
