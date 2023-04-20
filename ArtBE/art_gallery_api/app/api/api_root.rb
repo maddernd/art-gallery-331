@@ -9,6 +9,7 @@ require_relative 'user_tokens'
 require_relative 'aboriginal_symbols_api'
 
 class ApiRoot < Grape::API
+  helpers LogHelper
   prefix 'api'
   format :json
   
@@ -35,15 +36,14 @@ class ApiRoot < Grape::API
       message = "Missing value for #{e.param}"
       status = 400
     else
-      logger.error "Unhandled exception: #{e.class}"
-      logger.error e.inspect
-      logger.error e.backtrace.join("\n")
       message = "Sorry... something went wrong with your request."
       status = 500
     end
     Rack::Response.new({ error: message }.to_json, status, { 'Content-type' => 'text/error' })
   end
-
+  get do
+    { message: 'Welcome to the Art Gallery API!' }
+  end
   # Mount your API endpoints here
   mount ArtistsAPI
   mount ArtifactsAPI
@@ -53,23 +53,24 @@ class ApiRoot < Grape::API
   mount AboriginalSymbolsAPI
   mount UserTokens
 
-  # Enable Swagger documentation
   add_swagger_documentation(
     hide_documentation_path: true,
+    doc_endpoint: '/swagger',
     info: {
       title: 'Art Gallery API',
       description: 'This is a Grape API written by Daniel Maddern'
     },
-    mount_path: '/api/docs',
+    mount_path: '/swagger',
     hide_format: true,
     include: [
-      ArtistsAPI,
       ArtifactsAPI,
+      ArtistsAPI,
       ArtFactsAPI,
       ArtTypesAPI,
       UsersAPI,
       AboriginalSymbolsAPI,
       UserTokens
-    ]
+    ],
+    base_path: nil
   )
 end

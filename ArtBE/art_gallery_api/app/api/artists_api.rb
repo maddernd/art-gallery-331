@@ -1,7 +1,10 @@
 require 'grape'
+require 'grape-swagger'
 
 class ArtistsAPI < Grape::API
-
+  format :json
+  default_format :json
+  
   resource :artists do
     desc 'Return list of artists'
     get do
@@ -46,4 +49,13 @@ class ArtistsAPI < Grape::API
       artist.destroy
     end
   end
+  add_swagger_documentation(
+    api_version: '1.0',
+    base_path: '/api', 
+    hide_documentation_path: true,
+    info: {
+      title: 'Artists',
+      description: 'API for managing Artists'
+    }
+  )
 end

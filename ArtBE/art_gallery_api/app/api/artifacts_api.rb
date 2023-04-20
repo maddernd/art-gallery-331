@@ -1,7 +1,11 @@
 require 'grape'
+require 'grape-swagger'
 
 class ArtifactsAPI < Grape::API
 
+  format :json
+  default_format :json
+  
   resource :artifacts do
     desc 'Return list of artifacts'
     get do
@@ -50,4 +54,13 @@ class ArtifactsAPI < Grape::API
       artifact.destroy
     end
   end
+  add_swagger_documentation(
+    api_version: '1.0',
+    base_path: '/api', 
+    hide_documentation_path: true,
+    info: {
+      title: 'Artifacts',
+      description: 'API for managing artifacts'
+    }
+  )
 end

@@ -1,7 +1,10 @@
 require 'grape'
+require 'grape-swagger'
 
 class ArtTypesAPI < Grape::API
-
+  format :json
+  default_format :json
+  
   resource :art_types do
     desc 'Return list of art types'
     get do
@@ -44,4 +47,13 @@ class ArtTypesAPI < Grape::API
       art_type.destroy
     end
   end
+  add_swagger_documentation(
+    api_version: '1.0',
+    base_path: '/api', 
+    hide_documentation_path: true,
+    info: {
+      title: 'Art Types',
+      description: 'API for managing Art Types'
+    }
+  )
 end

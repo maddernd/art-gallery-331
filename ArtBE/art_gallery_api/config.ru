@@ -1,6 +1,12 @@
-# This file is used by Rack-based servers to start the application.
-
 require_relative "config/environment"
+require 'rack/contrib/try_static'
 
-run Rails.application
+use Rack::Deflater
+use Rack::TryStatic,
+  :root => "public",
+  :urls => %w[/swagger],
+  :try => ['.html', 'index.html', '/index.html']
 
+  map '/' do
+    run ArtGalleryApi::Application
+  end

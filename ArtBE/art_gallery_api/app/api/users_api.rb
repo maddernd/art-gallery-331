@@ -1,11 +1,13 @@
 require 'grape'
+require 'grape-swagger'
 
 class UsersAPI < Grape::API
+  format :json
+  default_format :json
   
   resource :users do
     desc 'Return list of users'
     get do
-      authenticate!
       User.all
     end
 
@@ -14,7 +16,6 @@ class UsersAPI < Grape::API
       requires :id, type: Integer, desc: 'User ID'
     end
     get ':id' do
-      authenticate!
       User.find(params[:id])
     end
 
@@ -36,7 +37,6 @@ class UsersAPI < Grape::API
       optional :password, type: String, desc: 'User password'
     end
     put ':id' do
-      authenticate!
       user = User.find(params[:id])
       user.update(name: params[:name], email: params[:email], password: params[:password])
       user
@@ -47,7 +47,6 @@ class UsersAPI < Grape::API
       requires :id, type: Integer, desc: 'User ID'
     end
     delete ':id' do
-      authenticate!
       user = User.find(params[:id])
       user.destroy
     end
@@ -67,4 +66,14 @@ class UsersAPI < Grape::API
       end
     end
   end
+
+  add_swagger_documentation(
+    api_version: '1.0',
+    base_path: '/api', 
+    hide_documentation_path: true,
+    info: {
+      title: 'Users',
+      description: 'API for managing Users'
+    }
+  )
 end

@@ -10,21 +10,22 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "mysql2", "~> 0.5"
 #Swagger
 gem 'grape-swagger'
-gem 'grape-swagger-rails'
-gem 'swagger_ui_engine'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 #add rack-cors
 gem 'rack-cors'
+gem 'rack-contrib'
 gem 'grape'
 gem 'grape-entity'
 gem 'grape_on_rails_routes'
 gem 'bcrypt'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
-gem 'sprockets', '~> 4.0'
+gem 'grape-swagger-rails'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
+gem 'zeitwerk'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -54,5 +55,3 @@ group :development do
   # gem "spring"
 end
 
-
-gem "sprockets-rails", "~> 3.4"

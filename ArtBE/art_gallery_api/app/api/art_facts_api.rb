@@ -1,6 +1,9 @@
 require 'grape'
+require 'grape-swagger'
 
 class ArtFactsAPI < Grape::API
+  format :json
+  default_format :json
   
   resource :art_facts do
     desc 'Return list of art facts'
@@ -46,4 +49,13 @@ class ArtFactsAPI < Grape::API
       art_fact.destroy
     end
   end
+  add_swagger_documentation(
+    api_version: '1.0',
+    base_path: '/api', 
+    hide_documentation_path: true,
+    info: {
+      title: 'Art Facts',
+      description: 'API for managing Art Facts'
+    }
+  )
 end

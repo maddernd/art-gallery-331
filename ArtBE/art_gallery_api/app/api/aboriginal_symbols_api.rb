@@ -1,6 +1,9 @@
 require 'grape'
+require 'grape-swagger'
 
 class AboriginalSymbolsAPI < Grape::API
+  format :json
+  default_format :json
 
   resource :aboriginal_symbols do
     desc 'Return list of aboriginal symbols'
@@ -47,4 +50,15 @@ class AboriginalSymbolsAPI < Grape::API
       symbol.destroy
     end
   end
+
+  add_swagger_documentation(
+    api_version: '1.0',
+    base_path: '/api', 
+    hide_documentation_path: true,
+    info: {
+      title: 'Aboriginal Symbols API',
+      description: 'API for managing aboriginal symbols'
+    }
+  )
 end
+

@@ -1,7 +1,9 @@
 require 'grape'
-require_relative '../app/api/ApiRoot'
+#require_relative '../app/api/ApiRoot'
 
-Rails.application.routes.draw do
+ArtGalleryApi::Application.routes.draw do
   mount ApiRoot => '/'
-  mount GrapeSwaggerRails::Engine, at: '/api/docs'
+  mount GrapeSwaggerRails::Engine => '/swagger'
+  #get '/swagger' => redirect('/swagger/index.html')
+  #get '/swagger/*path', to: 'grape_swagger_rails/application#serve'
 end
