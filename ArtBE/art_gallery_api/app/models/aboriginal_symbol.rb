@@ -1,2 +1,4 @@
 class AboriginalSymbol < ApplicationRecord
-end
+    belongs_to :aboriginal_tribe
+  end
+  

@@ -1,2 +1,5 @@
 class Artist < ApplicationRecord
-end
+    belongs_to :aboriginal_tribe
+    has_many :artifacts
+  end
+  
