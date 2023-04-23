@@ -1,13 +1,13 @@
-// AboriginalSymbols service
+// AboriginalSymbol service
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AboriginalSymbol } from './models/aboriginal_symbols';
+import { AboriginalSymbol } from '../services/models/aboriginal_symbols';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AboriginalSymbolsService {
+export class AboriginalSymbolService {
   private url = 'http://localhost:3000/api/aboriginal_symbols';
 
   constructor(private http: HttpClient) { }

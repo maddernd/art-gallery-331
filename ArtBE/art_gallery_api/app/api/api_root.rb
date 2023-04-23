@@ -55,12 +55,11 @@ class ApiRoot < Grape::API
 
   add_swagger_documentation(
     hide_documentation_path: true,
-    doc_endpoint: '/swagger',
     info: {
       title: 'Art Gallery API',
       description: 'This is a Grape API written by Daniel Maddern'
     },
-    mount_path: '/swagger',
+    mount_path: '/',
     hide_format: true,
     include: [
       ArtifactsAPI,
@@ -71,6 +70,6 @@ class ApiRoot < Grape::API
       AboriginalSymbolsAPI,
       UserTokens
     ],
-    base_path: nil
+    base_path: proc { |*| ApiRoot.prefix }
   )
 end

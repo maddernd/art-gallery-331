@@ -27,7 +27,7 @@ export class ArtTypesService {
     return this.http.put<ArtType>(`${this.url}/${id}`, artType);
   }
 
-  deleteArtType(id: number): Observable<ArtType> {
-    return this.http.delete<ArtType>(`${this.url}/${id}`);
+  deleteArtType(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`);
   }
 }

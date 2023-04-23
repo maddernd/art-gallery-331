@@ -1,7 +1,8 @@
 export interface User {
-    id: number;
-    name: string;
-    email: string;
-    password_digest: string;
-  }
-  
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  admin: boolean;
+  password?: string;
+}

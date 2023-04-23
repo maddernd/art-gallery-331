@@ -3,20 +3,45 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArtistsComponent } from './artists/artists.component';
-import { UsersComponent } from './users/users.component';
-import { ArtFactsComponent } from './art-facts/art-facts.component';
+import { ArtistComponent } from './components/artists/artist.component';
+import { UserComponent } from './components/users/user.component';
+import { ArtFactComponent } from './components/art-facts/art-fact.component';
+import { AboriginalSymbolComponent } from './components/aboriginal-symbols/aboriginal-symbol.component';
+import { ArtifactComponent } from './components/artifacts/artifacts.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArtistsComponent,
-    UsersComponent,
-    ArtFactsComponent
+    ArtistComponent,
+    UserComponent,
+    ArtFactComponent,
+    AboriginalSymbolComponent,
+    ArtifactComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatListModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

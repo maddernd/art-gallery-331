@@ -6,7 +6,7 @@ import { ArtFact } from './models/art_facts';
 @Injectable({
   providedIn: 'root'
 })
-export class ArtFactsService {
+export class ArtFactService {
   private url = 'http://localhost:3000/api/art_facts';
 
   constructor(private http: HttpClient) { }

@@ -1,0 +1,14 @@
+<div *ngIf="selectedArtist" class="artist-details">
+  <h2>Artist Details</h2>
+  <div>
+    <label for="name">Name:</label>
+    <input [(ngModel)]="selectedArtist.name" id="name" placeholder="Artist Name" *ngIf="selectedArtist" />
+  </div>
+  <button (click)="selectedArtist && selectedArtist.id ? updateArtist(selectedArtist) : createArtist(selectedArtist)">
+    Save
+  </button>
+  <button *ngIf="selectedArtist && selectedArtist.id" (click)="deleteArtist(selectedArtist)">
+    Delete
+  </button>
+  <button (click)="selectedArtist = null">Cancel</button>
+</div>

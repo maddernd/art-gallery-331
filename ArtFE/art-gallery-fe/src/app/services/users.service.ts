@@ -7,30 +7,31 @@ import { User } from './models/users';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/api/users';
+  private url = 'http://localhost:3000/api/users';
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(this.url);
   }
 
-  getUser(id: number): Observable<User> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get<User>(url);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`);
   }
 
   addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user);
+    // Use destructuring to remove password from user object
+    const { password, ...userWithoutPassword } = user;
+    // Send the user object with password_digest instead of password
+    return this.http.post<User>(this.url, { ...userWithoutPassword, password_digest: password });
+  }
+  
+
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.url}/${id}`, user);
   }
 
-  updateUser(user: User): Observable<any> {
-    const url = `${this.apiUrl}/${user.id}`;
-    return this.http.put(url, user);
-  }
-
-  deleteUser(id: number): Observable<User> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<User>(url);
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`);
   }
 }

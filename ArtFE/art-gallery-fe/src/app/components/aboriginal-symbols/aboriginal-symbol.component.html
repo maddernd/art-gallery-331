@@ -1,0 +1,28 @@
+<div class="aboriginal-symbols">
+  <h2>Aboriginal Symbols</h2>
+  <mat-list>
+    <mat-list-item *ngFor="let aboriginalSymbol of aboriginalSymbols" (click)="selectAboriginalSymbol(aboriginalSymbol)">
+      <h3 matLine>{{ aboriginalSymbol.name }}</h3>
+      <p matLine>{{ aboriginalSymbol.meaning }}</p>
+    </mat-list-item>
+  </mat-list>
+  <button mat-raised-button color="primary" (click)="selectAboriginalSymbol({ id: 0, name: '', meaning: '' })">Add Aboriginal Symbol</button>
+</div>
+
+<div *ngIf="selectedAboriginalSymbol" class="aboriginal-symbol-details">
+  <h2>Aboriginal Symbol Details</h2>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="selectedAboriginalSymbol.name" id="name" placeholder="Aboriginal Symbol Name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Meaning</mat-label>
+    <textarea matInput [(ngModel)]="selectedAboriginalSymbol.meaning" id="meaning" placeholder="Aboriginal Symbol Meaning"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="selectedAboriginalSymbol && selectedAboriginalSymbol.id ? updateAboriginalSymbol(selectedAboriginalSymbol) : createAboriginalSymbol(selectedAboriginalSymbol)">
+    Save
+  </button>
+  <button *ngIf="selectedAboriginalSymbol && selectedAboriginalSymbol.id" mat-raised-button color="warn" (click)="deleteAboriginalSymbol(selectedAboriginalSymbol)">
+    Delete
+  </button>
+</div>

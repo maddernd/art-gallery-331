@@ -1,11 +1,6 @@
 export interface ArtFact {
-    id: number;
-    artist_id: number;
-    title: string;
-    description: string;
-    year_made: number;
-    medium: string;
-    dimensions: string;
-    image_url: string;
-  }
-  
+  id: number;
+  title: string;
+  description: string;
+  image_url: string;
+}

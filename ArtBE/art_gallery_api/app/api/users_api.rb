@@ -8,7 +8,7 @@ class UsersAPI < Grape::API
   resource :users do
     desc 'Return list of users'
     get do
-      User.all
+      present User.all, with: Entities::User
     end
 
     desc 'Return a specific user'
@@ -16,30 +16,32 @@ class UsersAPI < Grape::API
       requires :id, type: Integer, desc: 'User ID'
     end
     get ':id' do
-      User.find(params[:id])
+      present User.find(params[:id]), with: Entities::User
     end
 
     desc 'Create a new user'
     params do
-      requires :name, type: String, desc: 'User name'
       requires :email, type: String, desc: 'User email'
+      requires :first_name, type: String, desc: 'User first name'
+      requires :last_name, type: String, desc: 'User last name'
       requires :password, type: String, desc: 'User password'
     end
     post do
-      User.create!(name: params[:name], email: params[:email], password: params[:password])
+      User.create!(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password])
     end
 
     desc 'Update a user'
     params do
       requires :id, type: Integer, desc: 'User ID'
-      requires :name, type: String, desc: 'User name'
       requires :email, type: String, desc: 'User email'
+      requires :first_name, type: String, desc: 'User first name'
+      requires :last_name, type: String, desc: 'User last name'
       optional :password, type: String, desc: 'User password'
     end
     put ':id' do
       user = User.find(params[:id])
-      user.update(name: params[:name], email: params[:email], password: params[:password])
-      user
+      user.update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password])
+      present user, with: Entities::User
     end
 
     desc 'Delete a user'
@@ -66,14 +68,4 @@ class UsersAPI < Grape::API
       end
     end
   end
-
-  add_swagger_documentation(
-    api_version: '1.0',
-    base_path: '/api', 
-    hide_documentation_path: true,
-    info: {
-      title: 'Users',
-      description: 'API for managing Users'
-    }
-  )
 end

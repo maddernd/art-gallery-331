@@ -109,6 +109,11 @@ GEM
       railties (>= 6.0.6.1)
     grape_on_rails_routes (0.3.2)
       rails (>= 3.1.1)
+    grape_token_auth (0.1.1)
+      bcrypt (~> 3.0)
+      grape (>= 0.12.0)
+      mail (~> 2.0)
+      warden (~> 1.2.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -188,9 +193,12 @@ GEM
       io-console (~> 0.5)
     ruby2_keywords (0.0.5)
     thor (1.2.1)
+    thread_safe (0.3.6)
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -208,11 +216,13 @@ DEPENDENCIES
   grape-swagger
   grape-swagger-rails
   grape_on_rails_routes
+  grape_token_auth
   mysql2 (~> 0.5)
   puma (~> 5.0)
   rack-contrib
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.3)
+  thread_safe
   tzinfo-data
   zeitwerk
 

@@ -2,6 +2,7 @@ require 'grape'
 require 'grape-swagger'
 
 class ArtFactsAPI < Grape::API
+
   format :json
   default_format :json
   
@@ -22,21 +23,23 @@ class ArtFactsAPI < Grape::API
     desc 'Create a new art fact'
     params do
       requires :title, type: String, desc: 'Art fact title'
-      optional :description, type: String, desc: 'Art fact description'
+      requires :description, type: String, desc: 'Art fact description'
+      optional :image_url, type: String, desc: 'Art fact image URL'
     end
     post do
-      ArtFact.create!(title: params[:title], description: params[:description])
+      ArtFact.create!(title: params[:title], description: params[:description], image_url: params[:image_url])
     end
 
     desc 'Update an art fact'
     params do
       requires :id, type: Integer, desc: 'Art fact ID'
       requires :title, type: String, desc: 'Art fact title'
-      optional :description, type: String, desc: 'Art fact description'
+      requires :description, type: String, desc: 'Art fact description'
+      optional :image_url, type: String, desc: 'Art fact image URL'
     end
     put ':id' do
       art_fact = ArtFact.find(params[:id])
-      art_fact.update(title: params[:title], description: params[:description])
+      art_fact.update(title: params[:title], description: params[:description], image_url: params[:image_url])
       art_fact
     end
 
@@ -49,13 +52,4 @@ class ArtFactsAPI < Grape::API
       art_fact.destroy
     end
   end
-  add_swagger_documentation(
-    api_version: '1.0',
-    base_path: '/api', 
-    hide_documentation_path: true,
-    info: {
-      title: 'Art Facts',
-      description: 'API for managing Art Facts'
-    }
-  )
 end

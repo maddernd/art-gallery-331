@@ -1,0 +1,38 @@
+<div class="art-facts">
+  <h2>Art Facts</h2>
+  <ul>
+    <li *ngFor="let artFact of artFacts" (click)="selectArtFact(artFact)">
+      {{ artFact.title }} - {{ artFact.description }}
+    </li>
+  </ul>
+  <button mat-raised-button color="primary" (click)="selectArtFact({ id: 0, title: '', description: '', image_url: '' })">Add Art Fact</button>
+</div>
+
+<div *ngIf="selectedArtFact" class="art-fact-details">
+  <h2>Art Fact Details</h2>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="selectedArtFact.title" id="title" placeholder="Art Fact Title" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="selectedArtFact.description" id="description" placeholder="Art Fact Description" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Image URL</mat-label>
+      <input matInput [(ngModel)]="selectedArtFact.image_url" id="image_url" placeholder="Art Fact Image URL" />
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="selectedArtFact && selectedArtFact.id ? updateArtFact(selectedArtFact) : createArtFact(selectedArtFact)">
+    Save
+  </button>
+  <button mat-raised-button color="warn" *ngIf="selectedArtFact && selectedArtFact.id" (click)="deleteArtFact(selectedArtFact)">
+    Delete
+  </button>
+  <button mat-raised-button (click)="selectedArtFact = null">Cancel</button>
+</div>

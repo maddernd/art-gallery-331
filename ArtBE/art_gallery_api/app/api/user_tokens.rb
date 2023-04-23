@@ -28,13 +28,4 @@ class UserTokens < Grape::API
       status 204
     end
   end
-  add_swagger_documentation(
-    api_version: '1.0',
-    base_path: '/api', 
-    hide_documentation_path: true,
-    info: {
-      title: 'User Tokens',
-      description: 'API for managing User Tokens'
-    }
-  )
 end

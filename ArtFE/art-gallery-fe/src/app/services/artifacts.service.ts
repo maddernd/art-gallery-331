@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Artist } from './models/artists';
+import { Artifact } from './models/artifacts';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArtistsService {
-  private url = 'http://localhost:3000/api/artists';
+export class ArtifactsService {
+  private url = 'http://localhost:3000/api/artifacts';
 
   constructor(private http: HttpClient) { }
 
-  getArtists(): Observable<Artist[]> {
-    return this.http.get<Artist[]>(this.url);
+  getArtifacts(): Observable<Artifact[]> {
+    return this.http.get<Artifact[]>(this.url);
   }
 
-  getArtist(id: number): Observable<Artist> {
-    return this.http.get<Artist>(`${this.url}/${id}`);
+  getArtifactById(id: number): Observable<Artifact> {
+    return this.http.get<Artifact>(`${this.url}/${id}`);
   }
 
-  addArtist(artist: Artist): Observable<Artist> {
-    return this.http.post<Artist>(this.url, artist);
+  addArtifact(artifact: Artifact): Observable<Artifact> {
+    return this.http.post<Artifact>(this.url, artifact);
   }
 
-  updateArtist(id: number, artist: Artist): Observable<Artist> {
-    return this.http.put<Artist>(`${this.url}/${id}`, artist);
+  updateArtifact(id: number, artifact: Artifact): Observable<Artifact> {
+    return this.http.put<Artifact>(`${this.url}/${id}`, artifact);
   }
 
-  deleteArtist(id: number): Observable<Artist> {
-    return this.http.delete<Artist>(`${this.url}/${id}`);
+  deleteArtifact(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`);
   }
 }

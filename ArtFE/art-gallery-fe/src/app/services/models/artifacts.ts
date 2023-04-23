@@ -1,11 +1,9 @@
-export interface Artifacts {
-    id: number;
-    artist_id: number;
-    title: string;
-    description: string;
-    year_made: number;
-    medium: string;
-    dimensions: string;
-    image_url: string;
-  }
+export interface Artifact {
+  id: number;
+  name: string;
+  description: string;
+  image_url: string;
+  artist_id: number;
+  art_type_id: number;
+}
   
