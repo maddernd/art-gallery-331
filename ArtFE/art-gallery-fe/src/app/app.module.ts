@@ -19,6 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+
 
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     FormsModule,
     HttpClientModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

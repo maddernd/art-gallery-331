@@ -10,7 +10,9 @@ import { AboriginalSymbol } from '../../services/models/aboriginal_symbols';
 export class AboriginalSymbolComponent implements OnInit {
   aboriginalSymbols: AboriginalSymbol[] = [];
   selectedAboriginalSymbol: AboriginalSymbol | null = null;
-
+  currentPage: number = 1;
+  pageSize: number = 10;
+  
   constructor(private aboriginalSymbolsService: AboriginalSymbolService) {}
 
   ngOnInit(): void {
@@ -18,7 +20,9 @@ export class AboriginalSymbolComponent implements OnInit {
   }
 
   getAboriginalSymbols(): void {
-    this.aboriginalSymbolsService.getAboriginalSymbols().subscribe((aboriginalSymbols) => (this.aboriginalSymbols = aboriginalSymbols));
+    this.aboriginalSymbolsService.getAboriginalSymbols().subscribe((aboriginalSymbols) => {
+      this.aboriginalSymbols = aboriginalSymbols;
+    });
   }
 
   selectAboriginalSymbol(aboriginalSymbol: AboriginalSymbol): void {
@@ -44,5 +48,32 @@ export class AboriginalSymbolComponent implements OnInit {
       this.aboriginalSymbols = this.aboriginalSymbols.filter((a) => a.id !== aboriginalSymbol.id);
       this.selectedAboriginalSymbol = null;
     });
+  }
+
+  get pagedAboriginalSymbols(): AboriginalSymbol[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.aboriginalSymbols.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.aboriginalSymbols.length / this.pageSize);
+  }
+
+  get pageNumbers(): number[] {
+    const totalPages = this.totalPages;
+    const pageNumbers = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+
+    return pageNumbers;
+  }
+
+  setPage(pageNumber: number) {
+    this.currentPage = pageNumber;
+  }
+  onPageChanged(event: any): void {
+    this.currentPage = event.pageIndex + 1;
   }
 }

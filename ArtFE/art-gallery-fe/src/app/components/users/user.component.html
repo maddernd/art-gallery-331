@@ -30,6 +30,7 @@
   <ul>
     <li *ngFor="let user of users">
       <a href="#" (click)="selectUser(user)">{{ user.first_name }} {{ user.last_name }}</a>
+      <button (click)="deleteUser(user)">Delete</button>
     </li>
   </ul>
 </div>

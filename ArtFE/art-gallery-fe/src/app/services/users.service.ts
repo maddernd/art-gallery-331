@@ -20,11 +20,9 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    // Use destructuring to remove password from user object
-    const { password, ...userWithoutPassword } = user;
-    // Send the user object with password_digest instead of password
-    return this.http.post<User>(this.url, { ...userWithoutPassword, password_digest: password });
+    return this.http.post<User>(this.url, user);
   }
+  
   
 
   updateUser(id: number, user: User): Observable<User> {

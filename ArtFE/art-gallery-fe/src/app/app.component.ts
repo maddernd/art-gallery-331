@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'art-gallery-fe';
+  showSpinner: boolean = true;
+  onActivate(): void {
+    this.showSpinner = false;
+  }
 }

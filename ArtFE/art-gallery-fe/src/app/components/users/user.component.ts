@@ -18,8 +18,18 @@ export class UserComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers().subscribe((users) => (this.users = users));
+    console.log('Getting users from the API');
+    this.userService.getUsers().subscribe(
+      (users) => {
+        console.log('Received users:', users);
+        this.users = users;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
   }
+  
 
   selectUser(user: User): void {
     this.selectedUser = user;
@@ -31,11 +41,13 @@ export class UserComponent implements OnInit {
       return;
     }
     const { password, ...userWithoutPassword } = user;
+    console.log('Sending user data:', { ...userWithoutPassword, password: password }); // Add this line to log the user data
     this.userService.addUser({ ...userWithoutPassword, password: password }).subscribe((newUser) => {
       this.users.push(newUser);
       this.newUser = { id: 0, email: '', first_name: '', last_name: '', admin: false, password: '' };
     });
   }
+  
   
 
   updateUser(user: User): void {

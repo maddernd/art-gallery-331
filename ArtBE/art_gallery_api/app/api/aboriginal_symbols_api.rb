@@ -25,9 +25,11 @@ class AboriginalSymbolsAPI < Grape::API
       requires :description, type: String, desc: 'Aboriginal symbol description'
     end
     post do
-      symbol = AboriginalSymbol.create!(name: params[:name], description: params[:description])
-      present symbol, with: Entities::AboriginalSymbol
+      aboriginal_symbol = AboriginalSymbol.create!(name: params[:name], description: params[:description])
+      puts "Aboriginal symbol created with ID: #{aboriginal_symbol.id}"
+      present aboriginal_symbol, with: Entities::AboriginalSymbol
     end
+
 
     desc 'Update an aboriginal symbol'
     params do

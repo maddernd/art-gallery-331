@@ -1,12 +1,13 @@
 <div class="aboriginal-symbols">
   <h2>Aboriginal Symbols</h2>
   <mat-list>
-    <mat-list-item *ngFor="let aboriginalSymbol of aboriginalSymbols" (click)="selectAboriginalSymbol(aboriginalSymbol)">
+    <mat-list-item *ngFor="let aboriginalSymbol of pagedAboriginalSymbols" (click)="selectAboriginalSymbol(aboriginalSymbol)">
       <h3 matLine>{{ aboriginalSymbol.name }}</h3>
-      <p matLine>{{ aboriginalSymbol.meaning }}</p>
+      <p matLine>{{ aboriginalSymbol.description }}</p>
     </mat-list-item>
   </mat-list>
-  <button mat-raised-button color="primary" (click)="selectAboriginalSymbol({ id: 0, name: '', meaning: '' })">Add Aboriginal Symbol</button>
+  <mat-paginator [pageSize]="pageSize" [length]="aboriginalSymbols.length" (page)="onPageChanged($event)"></mat-paginator>
+  <button mat-raised-button color="primary" (click)="selectAboriginalSymbol({ id: 0, name: '', description: '' })">Add Aboriginal Symbol</button>
 </div>
 
 <div *ngIf="selectedAboriginalSymbol" class="aboriginal-symbol-details">
@@ -16,8 +17,8 @@
     <input matInput [(ngModel)]="selectedAboriginalSymbol.name" id="name" placeholder="Aboriginal Symbol Name" />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Meaning</mat-label>
-    <textarea matInput [(ngModel)]="selectedAboriginalSymbol.meaning" id="meaning" placeholder="Aboriginal Symbol Meaning"></textarea>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="selectedAboriginalSymbol.description" id="description" placeholder="Aboriginal Symbol description"></textarea>
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="selectedAboriginalSymbol && selectedAboriginalSymbol.id ? updateAboriginalSymbol(selectedAboriginalSymbol) : createAboriginalSymbol(selectedAboriginalSymbol)">
     Save

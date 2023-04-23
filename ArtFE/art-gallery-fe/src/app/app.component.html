@@ -1,4 +1,4 @@
-<div>
+<div class="menu-container">
   <mat-toolbar color="primary">
     <span>Art Gallery App</span>
     <span class="spacer"></span>
@@ -25,4 +25,11 @@
   </mat-menu>
 </div>
 
-<router-outlet></router-outlet>
+<!-- Spinning image on the landing page -->
+<div *ngIf="showSpinner" class="spinner-container">
+  <img src="assets/home.jfif" alt="Loading..." class="full-width">
+</div>
+
+<div class="router-container">
+  <router-outlet (activate)="onActivate()"></router-outlet>
+</div>

@@ -8,8 +8,20 @@ class UsersAPI < Grape::API
   resource :users do
     desc 'Return list of users'
     get do
-      present User.all, with: Entities::User
+      begin
+        users = User.all
+        puts "Users fetched: #{users.count}"
+        response = present users, with: Entities::User
+        puts "Response: #{response}"
+        response
+      rescue => e
+        puts "Error: #{e.message}"
+        error!({ error: 'An error occurred while fetching users', message: e.message }, 500)
+      end
     end
+    
+    
+    
 
     desc 'Return a specific user'
     params do
@@ -27,8 +39,11 @@ class UsersAPI < Grape::API
       requires :password, type: String, desc: 'User password'
     end
     post do
-      User.create!(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password])
+      password_digest = BCrypt::Password.create(params[:password])
+      User.create!(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password_digest: password_digest)
     end
+
+    
 
     desc 'Update a user'
     params do

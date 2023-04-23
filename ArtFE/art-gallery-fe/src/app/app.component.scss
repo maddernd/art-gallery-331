@@ -15,4 +15,10 @@ html, body {
   .spacer {
     flex: 1 1 auto;
   }
+  .home-image {
+    height: calc(100vh - 64px); /* subtract the height of the toolbar (64px) from the viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
