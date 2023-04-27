@@ -2,8 +2,9 @@
   <h2>Aboriginal Symbols</h2>
   <mat-list>
     <mat-list-item *ngFor="let aboriginalSymbol of pagedAboriginalSymbols" (click)="selectAboriginalSymbol(aboriginalSymbol)">
-      <h3 matLine>{{ aboriginalSymbol.name }}</h3>
-      <p matLine>{{ aboriginalSymbol.description }}</p>
+      <h3 matLine>{{ aboriginalSymbol.symbol_name }}</h3>
+      <p matLine>{{ aboriginalSymbol.symbol_description }}</p>
+      
     </mat-list-item>
   </mat-list>
   <mat-paginator [pageSize]="pageSize" [length]="aboriginalSymbols.length" (page)="onPageChanged($event)"></mat-paginator>

@@ -3,7 +3,6 @@ class CreateArtists < ActiveRecord::Migration[7.0]
     create_table :artists do |t|
       t.string :name
       t.text :bio
-      t.references :aboriginal_tribe, null: false, foreign_key: true
 
       t.timestamps
     end

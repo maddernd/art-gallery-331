@@ -5,7 +5,6 @@ require_relative 'art_facts_api'
 require_relative 'art_types_api'
 require_relative 'artifacts_api'
 require_relative 'users_api'
-require_relative 'user_tokens'
 require_relative 'aboriginal_symbols_api'
 
 class ApiRoot < Grape::API
@@ -51,7 +50,6 @@ class ApiRoot < Grape::API
   mount ArtTypesAPI
   mount UsersAPI
   mount AboriginalSymbolsAPI
-  mount UserTokens
 
   add_swagger_documentation(
     hide_documentation_path: true,
@@ -68,7 +66,7 @@ class ApiRoot < Grape::API
       ArtTypesAPI,
       UsersAPI,
       AboriginalSymbolsAPI,
-      UserTokens
+
     ],
     base_path: proc { |*| ApiRoot.prefix }
   )

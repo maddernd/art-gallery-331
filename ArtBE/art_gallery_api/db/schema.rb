@@ -14,14 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_061956) do
   create_table "aboriginal_symbols", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.bigint "aboriginal_tribe_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["aboriginal_tribe_id"], name: "index_aboriginal_symbols_on_aboriginal_tribe_id"
-  end
-
-  create_table "aboriginal_tribes", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,20 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_061956) do
   create_table "artists", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.text "bio"
-    t.bigint "aboriginal_tribe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["aboriginal_tribe_id"], name: "index_artists_on_aboriginal_tribe_id"
-  end
-
-  create_table "user_tokens", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "token"
-    t.datetime "expires_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["token"], name: "index_user_tokens_on_token"
-    t.index ["user_id"], name: "index_user_tokens_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -83,10 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_061956) do
     t.string "last_name"
   end
 
-  add_foreign_key "aboriginal_symbols", "aboriginal_tribes"
   add_foreign_key "artifacts", "aboriginal_symbols"
   add_foreign_key "artifacts", "art_types"
   add_foreign_key "artifacts", "artists"
-  add_foreign_key "artists", "aboriginal_tribes"
-  add_foreign_key "user_tokens", "users"
 end

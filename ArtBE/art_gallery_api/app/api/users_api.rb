@@ -1,27 +1,26 @@
 require 'grape'
 require 'grape-swagger'
+require_relative './services/jwt_service'
+require_relative '../helpers/authentication_helper'
+
 
 class UsersAPI < Grape::API
+  helpers AuthenticationHelper
   format :json
   default_format :json
-  
+
   resource :users do
+    
     desc 'Return list of users'
     get do
       begin
         users = User.all
-        puts "Users fetched: #{users.count}"
         response = present users, with: Entities::User
-        puts "Response: #{response}"
         response
       rescue => e
-        puts "Error: #{e.message}"
         error!({ error: 'An error occurred while fetching users', message: e.message }, 500)
       end
     end
-    
-    
-    
 
     desc 'Return a specific user'
     params do
@@ -42,8 +41,6 @@ class UsersAPI < Grape::API
       password_digest = BCrypt::Password.create(params[:password])
       User.create!(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password_digest: password_digest)
     end
-
-    
 
     desc 'Update a user'
     params do
@@ -74,13 +71,32 @@ class UsersAPI < Grape::API
       requires :password, type: String, desc: 'User password'
     end
     post '/authenticate' do
-      user = User.find_by(email: params[:email])
-      if user && user.authenticate(params[:password])
-        token = JwtService.encode({ user_id: user.id })
-        { token: token }
-      else
-        error!('Unauthorized.', 401)
+      begin
+        user = User.find_by(email: params[:email])
+        if user
+          if user.authenticate(params[:password])
+            token = JwtService.encode({ user_id: user.id })
+            { token: token }
+          else
+            { error: 'Invalid password' }
+          end
+        else
+          { error: 'Invalid email' }
+        end
+      rescue => e
+        puts "Error: #{e.message}"
+        puts "Backtrace: #{e.backtrace.join("\n")}"
+        error!({ error: 'An error occurred while authenticating', message: e.message }, 500)
       end
+    end
+    
+    
+    
+
+    desc 'Logout a user'
+    delete '/logout' do
+      authenticate!
+      status 204
     end
   end
 end

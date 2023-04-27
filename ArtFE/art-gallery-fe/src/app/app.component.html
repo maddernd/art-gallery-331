@@ -3,6 +3,7 @@
     <span>Art Gallery App</span>
     <span class="spacer"></span>
     <button mat-button [matMenuTriggerFor]="artistsMenu">Artists</button>
+    <button mat-button [matMenuTriggerFor]="artifactsMenu">Artifacts</button>
     <button mat-button [matMenuTriggerFor]="artFactsMenu">Art Facts</button>
     <button mat-button [matMenuTriggerFor]="usersMenu">Users</button>
     <button mat-button [matMenuTriggerFor]="aboriginalSymbolsMenu">Aboriginal Symbols</button>
@@ -10,6 +11,10 @@
 
   <mat-menu #artistsMenu="matMenu">
     <button mat-menu-item routerLink="/artists">Artists</button>
+  </mat-menu>
+
+  <mat-menu #artifactsMenu="matMenu">
+    <button mat-menu-item routerLink="/artifacts">Artifacts</button>
   </mat-menu>
 
   <mat-menu #artFactsMenu="matMenu">
@@ -25,11 +30,4 @@
   </mat-menu>
 </div>
 
-<!-- Spinning image on the landing page -->
-<div *ngIf="showSpinner" class="spinner-container">
-  <img src="assets/home.jfif" alt="Loading..." class="full-width">
-</div>
-
-<div class="router-container">
-  <router-outlet (activate)="onActivate()"></router-outlet>
-</div>
+<router-outlet></router-outlet>

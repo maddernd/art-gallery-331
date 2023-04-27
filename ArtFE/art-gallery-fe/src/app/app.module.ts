@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArtistComponent } from './components/artists/artist.component';
@@ -15,13 +14,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
-
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
+import { SlideshowComponent } from './components/slideshow/slideshow.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginComponent } from './components/login/login.component';
+import { UsersSharedService } from './services/users-shared.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     UserComponent,
     ArtFactComponent,
     AboriginalSymbolComponent,
-    ArtifactComponent
+    ArtifactComponent,
+    SlideshowComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -44,10 +49,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatIconModule,
     MatListModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
+    MatCardModule,
+    MatSelectModule,
+    MatSnackBarModule
+
   ],
-  providers: [],
+  providers: [UsersSharedService], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

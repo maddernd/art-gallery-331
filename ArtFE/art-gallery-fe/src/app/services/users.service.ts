@@ -8,6 +8,7 @@ import { User } from './models/users';
 })
 export class UserService {
   private url = 'http://localhost:3000/api/users';
+  private tokenKey = 'token';
 
   constructor(private http: HttpClient) { }
 
@@ -22,8 +23,6 @@ export class UserService {
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.url, user);
   }
-  
-  
 
   updateUser(id: number, user: User): Observable<User> {
     return this.http.put<User>(`${this.url}/${id}`, user);
@@ -31,5 +30,17 @@ export class UserService {
 
   deleteUser(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}/${id}`);
+  }
+
+  login(email: string, password: string): Observable<string> {
+    return this.http.post<string>(`${this.url}/authenticate`, { email, password });
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem(this.tokenKey);
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
   }
 }

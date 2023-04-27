@@ -1,33 +1,16 @@
-# Seed data for Aboriginal Tribes
-aboriginal_tribes = [
-  { name: "Noongar" },
-  { name: "Yamatji" },
-  { name: "Nyoongah" },
-  { name: "Wajarri" },
-  { name: "Kija" },
-  { name: "Gunditjmara" },
-  { name: "Gamilaraay" },
-  { name: "Palawa" },
-  { name: "Wiradjuri" },
-  { name: "Arrernte" }
-]
-
-aboriginal_tribes.each do |tribe|
-  AboriginalTribe.create!(tribe)
-end
 
 # Seed data for Aboriginal Symbols
 aboriginal_symbols = [
-  { name: "Kangaroo Tracks", description: "This is a kangaroo track symbol", aboriginal_tribe_id: 1 },
-  { name: "Emu Tracks", description: "This is an emu track symbol", aboriginal_tribe_id: 2 },
-  { name: "Snake Tracks", description: "This is a snake track symbol", aboriginal_tribe_id: 3 },
-  { name: "Turtle", description: "This is a turtle symbol", aboriginal_tribe_id: 4 },
-  { name: "Goanna", description: "This is a goanna symbol", aboriginal_tribe_id: 5 },
-  { name: "Eagle", description: "This is an eagle symbol", aboriginal_tribe_id: 6 },
-  { name: "Fish", description: "This is a fish symbol", aboriginal_tribe_id: 7 },
-  { name: "Star", description: "This is a star symbol", aboriginal_tribe_id: 8 },
-  { name: "Moon", description: "This is a moon symbol", aboriginal_tribe_id: 9 },
-  { name: "Sun", description: "This is a sun symbol", aboriginal_tribe_id: 10 }
+  { name: "Kangaroo Tracks", description: "This is a kangaroo track symbol"},
+  { name: "Emu Tracks", description: "This is an emu track symbol"},
+  { name: "Snake Tracks", description: "This is a snake track symbol"},
+  { name: "Turtle", description: "This is a turtle symbol"},
+  { name: "Goanna", description: "This is a goanna symbol"},
+  { name: "Eagle", description: "This is an eagle symbol"},
+  { name: "Fish", description: "This is a fish symbol"},
+  { name: "Star", description: "This is a star symbol"},
+  { name: "Moon", description: "This is a moon symbol"},
+  { name: "Sun", description: "This is a sun symbol"}
 ]
 
 aboriginal_symbols.each do |symbol|
@@ -36,16 +19,16 @@ end
 
 # Seed data for Artists
 artists = [
-  { name: "Emily Kame Kngwarreye", bio: "Australian Aboriginal artist from Utopia, Northern Territory.", aboriginal_tribe_id: 1 },
-  { name: "Albert Namatjira", bio: "Australian Aboriginal artist from the Western Arrernte community.", aboriginal_tribe_id: 2 },
-  { name: "Lena Nyadbi", bio: "Australian Aboriginal artist from the Gija people in Western Australia.", aboriginal_tribe_id: 3 },
-  { name: "Paddy Bedford", bio: "Australian Aboriginal painter from the Gija language group in Western Australia.", aboriginal_tribe_id: 4 },
-  { name: "Sally Gabori", bio: "Australian Aboriginal artist from Bentinck Island in the Gulf of Carpentaria.", aboriginal_tribe_id: 5 },
-  { name: "Dorothy Napangardi", bio: "Australian Aboriginal artist from the Walpiri language group in the Northern Territory.", aboriginal_tribe_id: 6 },
-  { name: "Clifford Possum Tjapaltjarri", bio: "Australian Aboriginal artist from the Warlpiri language group in the Northern Territory.", aboriginal_tribe_id: 7 },
-  { name: "Gloria Petyarre", bio: "Australian Aboriginal artist from  Utopia, Northern Territory.", aboriginal_tribe_id: 8 },
-  { name: "Bill Whiskey Tjapaltjarri", bio: "Australian Aboriginal artist from the Pintupi language group in the Western Desert.", aboriginal_tribe_id: 9 },
-  { name: "Tommy Mitchell", bio: "Australian Aboriginal artist from the Yindjibarndi language group in the Pilbara region of Western Australia.", aboriginal_tribe_id: 10 }
+  { name: "Emily Kame Kngwarreye", bio: "Australian Aboriginal artist from Utopia, Northern Territory." },
+  { name: "Albert Namatjira", bio: "Australian Aboriginal artist from the Western Arrernte community."},
+  { name: "Lena Nyadbi", bio: "Australian Aboriginal artist from the Gija people in Western Australia."},
+  { name: "Paddy Bedford", bio: "Australian Aboriginal painter from the Gija language group in Western Australia."},
+  { name: "Sally Gabori", bio: "Australian Aboriginal artist from Bentinck Island in the Gulf of Carpentaria."},
+  { name: "Dorothy Napangardi", bio: "Australian Aboriginal artist from the Walpiri language group in the Northern Territory."},
+  { name: "Clifford Possum Tjapaltjarri", bio: "Australian Aboriginal artist from the Warlpiri language group in the Northern Territory."},
+  { name: "Gloria Petyarre", bio: "Australian Aboriginal artist from  Utopia, Northern Territory."},
+  { name: "Bill Whiskey Tjapaltjarri", bio: "Australian Aboriginal artist from the Pintupi language group in the Western Desert."},
+  { name: "Tommy Mitchell", bio: "Australian Aboriginal artist from the Yindjibarndi language group in the Pilbara region of Western Australia."}
 ]
 
 artists.each do |artist|

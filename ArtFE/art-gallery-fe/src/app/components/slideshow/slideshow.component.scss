@@ -1,0 +1,22 @@
+.slideshow {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  
+  .slide {
+    flex: 1 1 300px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .slide img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .slide mat-card-title {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  

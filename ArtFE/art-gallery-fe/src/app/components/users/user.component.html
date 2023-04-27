@@ -2,19 +2,19 @@
   <h2>User Details</h2>
   <div>
     <label for="first_name">First Name:</label>
-    <input [(ngModel)]="selectedUser.first_name" id="first_name" placeholder="User First Name" />
+    <input [(ngModel)]="selectedUser.first_name" id="first_name" placeholder="User First Name" name="first_name" />
   </div>
   <div>
     <label for="last_name">Last Name:</label>
-    <input [(ngModel)]="selectedUser.last_name" id="last_name" placeholder="User Last Name" />
+    <input [(ngModel)]="selectedUser.last_name" id="last_name" placeholder="User Last Name" name="last_name" />
   </div>
   <div>
     <label for="email">Email:</label>
-    <input [(ngModel)]="selectedUser.email" id="email" placeholder="User Email" />
+    <input [(ngModel)]="selectedUser.email" id="email" placeholder="User Email" name="email" />
   </div>
   <div>
     <label for="password">Password:</label>
-    <input [(ngModel)]="selectedUser.password" id="password" placeholder="User Password" type="password" />
+    <input [(ngModel)]="selectedUser.password" id="password" placeholder="User Password" type="password" name="password" />
   </div>
   <button (click)="selectedUser && selectedUser.id ? updateUser(selectedUser) : createUser(selectedUser)">
     Save
@@ -23,35 +23,4 @@
     Delete
   </button>
   <button (click)="selectedUser = null">Cancel</button>
-</div>
-
-<div>
-  <h2>Users</h2>
-  <ul>
-    <li *ngFor="let user of users">
-      <a href="#" (click)="selectUser(user)">{{ user.first_name }} {{ user.last_name }}</a>
-      <button (click)="deleteUser(user)">Delete</button>
-    </li>
-  </ul>
-</div>
-
-<div>
-  <h2>Create User</h2>
-  <div>
-    <label for="new_first_name">First Name:</label>
-    <input [(ngModel)]="newUser.first_name" id="new_first_name" placeholder="User First Name" />
-  </div>
-  <div>
-    <label for="new_last_name">Last Name:</label>
-    <input [(ngModel)]="newUser.last_name" id="new_last_name" placeholder="User Last Name" />
-  </div>
-  <div>
-    <label for="new_email">Email:</label>
-    <input [(ngModel)]="newUser.email" id="new_email" placeholder="User Email" />
-  </div>
-  <div>
-    <label for="new_password">Password:</label>
-    <input [(ngModel)]="newUser.password" id="new_password" placeholder="User Password" type="password" />
-  </div>
-  <button (click)="createUser(newUser)">Create</button>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/users.service';
 import { User } from '../../services/models/users';
+import { FormsModule } from '@angular/forms';
+import { UsersSharedService } from '../../services/users-shared.service';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +13,7 @@ export class UserComponent implements OnInit {
   selectedUser: User | null = null;
   newUser: User = { id: 0, email: '', first_name: '', last_name: '', admin: false, password: '' };
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private usersSharedService: UsersSharedService) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -23,6 +25,7 @@ export class UserComponent implements OnInit {
       (users) => {
         console.log('Received users:', users);
         this.users = users;
+        this.usersSharedService.users = users; // Update the users array in the shared service
       },
       (error) => {
         console.error('Error fetching users:', error);
@@ -45,6 +48,7 @@ export class UserComponent implements OnInit {
     this.userService.addUser({ ...userWithoutPassword, password: password }).subscribe((newUser) => {
       this.users.push(newUser);
       this.newUser = { id: 0, email: '', first_name: '', last_name: '', admin: false, password: '' };
+      this.usersSharedService.users.push(newUser); // Update the users array in the shared service
     });
   }
   
@@ -61,6 +65,7 @@ export class UserComponent implements OnInit {
     this.userService.deleteUser(user.id).subscribe(() => {
       this.users = this.users.filter((u) => u.id !== user.id);
       this.selectedUser = null;
+      this.usersSharedService.users = this.usersSharedService.users.filter((u) => u.id !== user.id); // Update the users array in the shared service
     });
   }
 }

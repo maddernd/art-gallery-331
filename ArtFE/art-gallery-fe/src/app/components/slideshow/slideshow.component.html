@@ -1,0 +1,12 @@
+<div class="slideshow">
+    <mat-card class="slide" *ngFor="let artifact of artifacts; let i = index;" [class.active]="selectedArtifactIndex === i" (click)="selectArtifact(i)">
+      <img mat-card-image [src]="artifact.image_url" alt="{{artifact.name}}" />
+      <mat-card-title>{{artifact.name}}</mat-card-title>
+    </mat-card>
+  </div>
+  
+  <div class="selected-artist" *ngIf="selectedArtist">
+    <h2>{{selectedArtist.name}}</h2>
+    <p>{{selectedArtist.bio}}</p>
+  </div>
+  
