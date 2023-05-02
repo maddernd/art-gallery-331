@@ -1,12 +1,56 @@
+<h2>Artists</h2>
+
+<!-- List of artists -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Bio</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let artist of artists">
+      <td>{{ artist.id }}</td>
+      <td>{{ artist.name }}</td>
+      <td>{{ artist.bio }}</td>
+      <td>
+        <button (click)="selectArtist(artist)">Edit</button>
+        <button (click)="deleteArtist(artist)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Form to add an artist -->
+<div class="artist-details">
+  <h2>Add Artist</h2>
+  <form (ngSubmit)="onAddSubmit()">
+    <div>
+      <label for="add-name">Name:</label>
+      <input [(ngModel)]="newArtist.name" id="add-name" placeholder="Artist Name" name="add-name" />
+    </div>
+    <div>
+      <label for="add-bio">Bio:</label>
+      <textarea [(ngModel)]="newArtist.bio" id="add-bio" placeholder="Artist Bio" name="add-bio"></textarea>
+    </div>
+    <button type="submit">Add</button>
+  </form>
+</div>
+
+<!-- Form to edit an artist -->
 <div *ngIf="selectedArtist" class="artist-details">
-  <h2>Artist Details</h2>
-  <form [formGroup]="artistForm" (ngSubmit)="onSubmit()">
+  <h2>{{ selectedArtist.id ? 'Edit' : 'Add' }} Artist</h2>
+  <form (ngSubmit)="onSubmit()">
     <div>
       <label for="name">Name:</label>
-      <input formControlName="name" id="name" placeholder="Artist Name" />
+      <input [(ngModel)]="selectedArtist.name" id="name" placeholder="Artist Name" name="name" />
     </div>
-    <button type="submit">Save</button>
-    <button *ngIf="selectedArtist.id" (click)="deleteArtist(selectedArtist)">Delete</button>
-    <button type="button" (click)="artistForm.reset(); selectedArtist = null">Cancel</button>
+    <div>
+      <label for="bio">Bio:</label>
+      <textarea [(ngModel)]="selectedArtist.bio" id="bio" placeholder="Artist Bio" name="bio"></textarea>
+    </div>
+    <button type="submit">{{ selectedArtist.id ? 'Update' : 'Add' }}</button>
+    <button type="button" (click)="selectedArtist = null">Cancel</button>
   </form>
 </div>

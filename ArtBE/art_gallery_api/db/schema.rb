@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_23_061956) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_220453) do
   create_table "aboriginal_symbols", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -41,7 +41,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_061956) do
     t.bigint "art_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "art_fact_id"
     t.index ["aboriginal_symbol_id"], name: "index_artifacts_on_aboriginal_symbol_id"
+    t.index ["art_fact_id"], name: "index_artifacts_on_art_fact_id"
     t.index ["art_type_id"], name: "index_artifacts_on_art_type_id"
     t.index ["artist_id"], name: "index_artifacts_on_artist_id"
   end
@@ -64,6 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_061956) do
   end
 
   add_foreign_key "artifacts", "aboriginal_symbols"
+  add_foreign_key "artifacts", "art_facts"
   add_foreign_key "artifacts", "art_types"
   add_foreign_key "artifacts", "artists"
 end

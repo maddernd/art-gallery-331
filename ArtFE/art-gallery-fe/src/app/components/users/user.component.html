@@ -1,26 +1,53 @@
-<div *ngIf="selectedUser" class="user-details">
-  <h2>User Details</h2>
-  <div>
-    <label for="first_name">First Name:</label>
-    <input [(ngModel)]="selectedUser.first_name" id="first_name" placeholder="User First Name" name="first_name" />
-  </div>
-  <div>
-    <label for="last_name">Last Name:</label>
-    <input [(ngModel)]="selectedUser.last_name" id="last_name" placeholder="User Last Name" name="last_name" />
-  </div>
-  <div>
-    <label for="email">Email:</label>
-    <input [(ngModel)]="selectedUser.email" id="email" placeholder="User Email" name="email" />
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input [(ngModel)]="selectedUser.password" id="password" placeholder="User Password" type="password" name="password" />
-  </div>
-  <button (click)="selectedUser && selectedUser.id ? updateUser(selectedUser) : createUser(selectedUser)">
-    Save
-  </button>
-  <button *ngIf="selectedUser && selectedUser.id" (click)="deleteUser(selectedUser)">
-    Delete
-  </button>
-  <button (click)="selectedUser = null">Cancel</button>
-</div>
+<h2>Create User</h2>
+<form [formGroup]="createUserForm">
+  <table>
+    <tr>
+      <td><label for="new_user_first_name">First Name:</label></td>
+      <td><input formControlName="first_name" id="new_user_first_name" placeholder="User First Name" /></td>
+    </tr>
+    <tr>
+      <td><label for="new_user_last_name">Last Name:</label></td>
+      <td><input formControlName="last_name" id="new_user_last_name" placeholder="User Last Name" /></td>
+    </tr>
+    <tr>
+      <td><label for="new_user_email">Email:</label></td>
+      <td><input formControlName="email" id="new_user_email" placeholder="User Email" /></td>
+    </tr>
+    <tr>
+      <td><label for="new_user_password">Password:</label></td>
+      <td><input formControlName="password" id="new_user_password" placeholder="User Password" type="password" /></td>
+    </tr>
+    <tr>
+      <td><label for="new_user_admin">Admin:</label></td>
+      <td><input formControlName="admin" id="new_user_admin" type="checkbox" /></td>
+    </tr>
+  </table>
+  <button (click)="createUser()">Add User</button>
+</form>
+
+<h2>List of Users</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.admin }}</td>
+      <td>
+        <button (click)="selectUser(user)">Edit</button>
+        <button (click)="deleteUser(user)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,11 +1,71 @@
-.artists,
-.artist-details {
+h2 {
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+button {
+  margin-right: 0.5rem;
+}
+
 .artist-details {
-  input {
-    display: block;
-    margin-bottom: 1rem;
-  }
+  margin-top: 1rem;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  max-width: 600px;
+}
+
+.artist-details h2 {
+  font-size: 1.25rem;
+  margin-top: 0;
+}
+
+.artist-details form div {
+  margin-bottom: 1rem;
+}
+
+.artist-details label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.artist-details input,
+.artist-details textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.artist-details button[type="submit"] {
+  margin-right: 0.5rem;
+}
+
+.artist-details button[type="button"] {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1rem;
 }

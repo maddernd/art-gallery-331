@@ -21,7 +21,10 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url, user);
+    // Hash the password before sending it to the server
+    const password_digest = btoa(user.password!);
+    const newUser = { ...user, password_digest };
+    return this.http.post<User>(this.url, newUser);
   }
 
   updateUser(id: number, user: User): Observable<User> {

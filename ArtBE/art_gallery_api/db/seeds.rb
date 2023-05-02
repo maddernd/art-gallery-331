@@ -53,23 +53,8 @@ art_types.each do |art_type|
   ArtType.create!(art_type)
 end
 
-# Seed data for Artifacts
-artifacts = [
-  { name: "My Art", description: "This is my art", artist_id: 1, aboriginal_symbol_id: 1, art_type_id: 1, image_url: "https://example.com/my_art.png" },
-  { name: "Your Art", description: "This is your art", artist_id: 2, aboriginal_symbol_id: 2, art_type_id: 2, image_url: "https://example.com/your_art.png" },
-  { name: "Their Art", description: "This is their art", artist_id: 3, aboriginal_symbol_id: 3, art_type_id: 3, image_url: "https://example.com/their_art.png" },
-  { name: "Another Art", description: "This is another art", artist_id: 4, aboriginal_symbol_id: 4, art_type_id: 4, image_url: "https://example.com/another_art.png" },
-  { name: "Amazing Art", description: "This is an amazing art", artist_id: 5, aboriginal_symbol_id: 5, art_type_id: 5, image_url: "https://example.com/amazing_art.png" },
-  { name: "Colorful Art", description: "This is a colorful art", artist_id: 6, aboriginal_symbol_id: 6, art_type_id: 6, image_url: "https://example.com/colorful_art.png" },
-  { name: "Wooden Art", description: "This is a wooden art", artist_id: 7, aboriginal_symbol_id: 7, art_type_id: 7, image_url: "https://example.com/wooden_art.png" },
-  { name: "Fabric Art", description: "This is a fabric art", artist_id: 8, aboriginal_symbol_id: 8, art_type_id: 8, image_url: "https://example.com/fabric_art.png" },
-  { name: "Ceramic Art", description: "This is a ceramic art", artist_id: 9, aboriginal_symbol_id: 9, art_type_id: 9, image_url: "https://example.com/ceramic_art.png" },
-  { name: "Mixed Media Art", description: "This is a mixed media art", artist_id: 10, aboriginal_symbol_id: 10, art_type_id: 10, image_url: "https://example.com/mixed_media_art.png" }
-]
 
-artifacts.each do |artifact|
-  Artifact.create!(artifact)
-end
+
 
 # Seed data for ArtFacts
 art_facts = [
@@ -89,6 +74,23 @@ art_facts.each do |art_fact|
   ArtFact.create!(art_fact)
 end
 
+# Seed data for Artifacts
+artifacts = [
+  { name: "My Art", description: "This is my art", artist_id: 1, aboriginal_symbol_id: 1, art_type_id: 1, art_fact_id: 1, image_url: "assets/art/1.jfif" },
+  { name: "Your Art", description: "This is your art", artist_id: 2, aboriginal_symbol_id: 2, art_type_id: 2, art_fact_id: 2, image_url: "assets/art/2.jfif" },
+  { name: "Their Art", description: "This is their art", artist_id: 3, aboriginal_symbol_id: 3, art_type_id: 3, art_fact_id: 3, image_url: "assets/art/3.jfif" },
+  { name: "Another Art", description: "This is another art", artist_id: 4, aboriginal_symbol_id: 4, art_type_id: 4, art_fact_id: 4, image_url: "assets/art/4.jfif" },
+  { name: "Amazing Art", description: "This is an amazing art", artist_id: 5, aboriginal_symbol_id: 5, art_type_id: 5, art_fact_id: 5, image_url: "assets/art/5.jfif" },
+  { name: "Colorful Art", description: "This is a colorful art", artist_id: 6, aboriginal_symbol_id: 6, art_type_id: 6, art_fact_id: 6, image_url: "assets/art/6.jfif" },
+  { name: "Wooden Art", description: "This is a wooden art", artist_id: 7, aboriginal_symbol_id: 7, art_type_id: 7, art_fact_id: 7, image_url: "assets/art/7.jfif" },
+  { name: "Fabric Art", description: "This is a fabric art", artist_id: 8, aboriginal_symbol_id: 8, art_type_id: 8, art_fact_id: 8, image_url: "assets/art/8.jfif" },
+  { name: "Ceramic Art", description: "This is a ceramic art", artist_id: 9, aboriginal_symbol_id: 9, art_type_id: 9, art_fact_id: 9, image_url: "assets/art/9.jfif" },
+  { name: "Mixed Media Art", description: "This is a mixed media art", artist_id: 10, aboriginal_symbol_id: 10, art_type_id: 10, art_fact_id: 10, image_url: "assets/art/10.jfif" }
+]
+
+artifacts.each do |artifact|
+  Artifact.create!(artifact)
+end
 # Seed data for Users
 users = [
   { email: "user1@example.com", password_digest: BCrypt::Password.create('password'), first_name: "John", last_name: "Doe", admin: false },

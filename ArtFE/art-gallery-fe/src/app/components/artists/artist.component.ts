@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Artist } from '../../services/models/artists';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ArtistsService } from '../../services/artists.service';
+import { Artist } from '../../services/models/artists';
 
 @Component({
   selector: 'app-artist',
@@ -10,16 +10,16 @@ import { ArtistsService } from '../../services/artists.service';
 export class ArtistComponent implements OnInit {
   artists: Artist[] = [];
   selectedArtist: Artist | null = null;
-  artistForm: FormGroup;
-
-  constructor(private artistService: ArtistsService, private fb: FormBuilder) {
-    this.artistForm = this.fb.group({
-      name: ['', Validators.required],
-    });
-  }
+  artistForm!: FormGroup;
+  newArtist: Artist = {  name: '', bio: '' };
+  constructor(private artistService: ArtistsService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.getArtists();
+    this.artistForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      bio: [''],
+    });
   }
 
   getArtists(): void {
@@ -37,33 +37,7 @@ export class ArtistComponent implements OnInit {
 
   selectArtist(artist: Artist): void {
     this.selectedArtist = artist;
-    this.artistForm.setValue({
-      name: artist.name,
-    });
-  }
-
-  createArtist(artist: Artist): void {
-    this.artistService.addArtist(artist).subscribe((newArtist) => {
-      this.artists.push(newArtist);
-      this.selectedArtist = null;
-      this.artistForm.reset();
-    });
-  }
-
-  updateArtist(artist: Artist): void {
-    this.artistService.updateArtist(artist.id, artist).subscribe(() => {
-      this.getArtists();
-      this.selectedArtist = null;
-      this.artistForm.reset();
-    });
-  }
-
-  deleteArtist(artist: Artist): void {
-    this.artistService.deleteArtist(artist.id).subscribe(() => {
-      this.artists = this.artists.filter((a) => a.id !== artist.id);
-      this.selectedArtist = null;
-      this.artistForm.reset();
-    });
+    this.artistForm.setValue({ name: artist.name, bio: artist.bio });
   }
 
   onSubmit(): void {
@@ -71,15 +45,36 @@ export class ArtistComponent implements OnInit {
       return;
     }
 
-    const artist = {
-      ...this.artistForm.value,
-      id: this.selectedArtist ? this.selectedArtist.id : 0,
-    };
+    const artist = this.artistForm.value;
+    if (this.selectedArtist && this.selectedArtist.id) {
+      artist.id = this.selectedArtist.id;
+      this.artistService.updateArtist(artist.id, artist).subscribe(() => {
+        this.getArtists();
+        this.selectedArtist = null;
+        this.artistForm.reset();
+      });
 
-    if (this.selectedArtist) {
-      this.updateArtist(artist);
     } else {
-      this.createArtist(artist);
+      this.artistService.addArtist(artist).subscribe((newArtist) => {
+        this.artists.push(newArtist);
+        this.artistForm.reset();
+      });
     }
+  }
+
+  deleteArtist(artist: Artist): void {
+    if (artist.id) {
+        this.artistService.deleteArtist(artist.id).subscribe(() => {
+            this.artists = this.artists.filter((a) => a.id !== artist.id);
+            this.selectedArtist = null;
+            this.artistForm.reset();
+        });
+    }
+}
+  onAddSubmit(): void {
+    this.artistService.addArtist(this.newArtist).subscribe((newArtist) => {
+      this.artists.push(newArtist);
+      this.newArtist = { name: '', bio: '' };
+    });
   }
 }

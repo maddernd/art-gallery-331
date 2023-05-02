@@ -38,8 +38,7 @@ class UsersAPI < Grape::API
       requires :password, type: String, desc: 'User password'
     end
     post do
-      password_digest = BCrypt::Password.create(params[:password])
-      User.create!(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password_digest: password_digest)
+      User.create!(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password])
     end
 
     desc 'Update a user'
@@ -89,9 +88,6 @@ class UsersAPI < Grape::API
         error!({ error: 'An error occurred while authenticating', message: e.message }, 500)
       end
     end
-    
-    
-    
 
     desc 'Logout a user'
     delete '/logout' do

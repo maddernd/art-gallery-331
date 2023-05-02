@@ -5,5 +5,6 @@ module Entities
     expose :first_name
     expose :last_name
     expose :admin
+    expose :password_digest
   end
 end

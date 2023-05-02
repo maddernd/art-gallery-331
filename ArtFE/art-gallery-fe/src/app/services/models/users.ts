@@ -6,3 +6,4 @@ export interface User {
   admin: boolean;
   password?: string;
 }
+

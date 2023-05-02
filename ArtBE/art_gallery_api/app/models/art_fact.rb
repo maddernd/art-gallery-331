@@ -1,2 +1,3 @@
 class ArtFact < ApplicationRecord
-end
+    has_many :artifacts
+  end

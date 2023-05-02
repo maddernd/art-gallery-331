@@ -1,32 +1,56 @@
 <div class="artifacts">
   <h2>Artifacts</h2>
-  <ul>
-    <li *ngFor="let artifact of artifacts" (click)="selectArtifact(artifact)">
-      {{ artifact.name }}
-    </li>
-  </ul>
-  <button (click)="selectArtifact({ id: 0, name: '', description: '', image_url: '', artist_id: 0, art_type_id: 0 })">Add Artifact</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Image URL</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let artifact of artifacts" (click)="selectArtifact(artifact)">
+        <td>{{ artifact.name }}</td>
+        <td>{{ artifact.description }}</td>
+        <td>{{ artifact.image_url }}</td>
+        <td>
+          <button mat-raised-button color="primary" (click)="selectArtifact(artifact)">Edit</button>
+          <button mat-raised-button color="warn" (click)="deleteArtifact(artifact)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button mat-raised-button color="primary" (click)="selectArtifact({ id: 0, name: '', description: '', image_url: '', artist_id: 0, art_type_id: 0 })">Add Artifact</button>
 </div>
 
 <div *ngIf="selectedArtifact" class="artifact-details">
   <h2>Artifact Details</h2>
-  <div>
-    <label for="name">Name:</label>
-    <input [(ngModel)]="selectedArtifact.name" id="name" placeholder="Artifact Name" *ngIf="selectedArtifact" />
-  </div>
-  <div>
-    <label for="description">Description:</label>
-    <input [(ngModel)]="selectedArtifact.description" id="description" placeholder="Description" *ngIf="selectedArtifact" />
-  </div>
-  <div>
-    <label for="image_url">Image URL:</label>
-    <input [(ngModel)]="selectedArtifact.image_url" id="image_url" placeholder="Image URL" *ngIf="selectedArtifact" />
-  </div>
-  <button (click)="selectedArtifact && selectedArtifact.id ? updateArtifact(selectedArtifact) : createArtifact(selectedArtifact)">
-    Save
-  </button>
-  <button *ngIf="selectedArtifact && selectedArtifact.id" (click)="deleteArtifact(selectedArtifact)">
-    Delete
-  </button>
-  <button (click)="selectedArtifact = null">Cancel</button>
+  <form>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="selectedArtifact.name" id="name" placeholder="Artifact Name" *ngIf="selectedArtifact" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="selectedArtifact.description" id="description" placeholder="Description" *ngIf="selectedArtifact" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Image URL</mat-label>
+        <input matInput [(ngModel)]="selectedArtifact.image_url" id="image_url" placeholder="Image URL" *ngIf="selectedArtifact" />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="button" (click)="selectedArtifact && selectedArtifact.id ? updateArtifact(selectedArtifact) : createArtifact(selectedArtifact)">
+      Save
+    </button>
+    <button mat-raised-button color="warn" *ngIf="selectedArtifact && selectedArtifact.id" type="button" (click)="deleteArtifact(selectedArtifact)">
+      Delete
+    </button>
+    <button mat-raised-button type="button" (click)="selectedArtifact = null">Cancel</button>
+  </form>
 </div>

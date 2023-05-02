@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../services/users.service';
 import { User } from '../../services/models/users';
-import { FormsModule } from '@angular/forms';
 import { UsersSharedService } from '../../services/users-shared.service';
 
 @Component({
@@ -11,7 +11,13 @@ import { UsersSharedService } from '../../services/users-shared.service';
 export class UserComponent implements OnInit {
   users: User[] = [];
   selectedUser: User | null = null;
-  newUser: User = { id: 0, email: '', first_name: '', last_name: '', admin: false, password: '' };
+
+  createUserForm: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    first_name: new FormControl('', [Validators.required]),
+    last_name: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  });
 
   constructor(private userService: UserService, private usersSharedService: UsersSharedService) {}
 
@@ -25,33 +31,33 @@ export class UserComponent implements OnInit {
       (users) => {
         console.log('Received users:', users);
         this.users = users;
-        this.usersSharedService.users = users; // Update the users array in the shared service
+        this.usersSharedService.users = users; 
       },
       (error) => {
         console.error('Error fetching users:', error);
       }
     );
   }
-  
 
   selectUser(user: User): void {
     this.selectedUser = user;
   }
 
-  createUser(user: User): void {
-    if (!user.password) {
-      console.log('Please enter a password');
+  createUser(): void {
+    if (this.createUserForm.invalid) {
+      console.log('Please enter valid user data');
       return;
     }
-    const { password, ...userWithoutPassword } = user;
-    console.log('Sending user data:', { ...userWithoutPassword, password: password }); // Add this line to log the user data
-    this.userService.addUser({ ...userWithoutPassword, password: password }).subscribe((newUser) => {
-      this.users.push(newUser);
-      this.newUser = { id: 0, email: '', first_name: '', last_name: '', admin: false, password: '' };
-      this.usersSharedService.users.push(newUser); // Update the users array in the shared service
+  
+    const { password, admin, ...userWithoutPassword } = this.createUserForm.value;
+    console.log('Sending user data:', { ...userWithoutPassword, password: password, admin: admin }); 
+  
+    this.userService.addUser({ ...userWithoutPassword, password: password, admin: admin }).subscribe((newUser) => {
+      //this.users.push(newUser);
+      this.createUserForm.reset();
+      this.usersSharedService.users.push(newUser); 
     });
   }
-  
   
 
   updateUser(user: User): void {
